@@ -1,4 +1,3 @@
-from __future__ import print_function
 import tweepy
 import json
 from pymongo import MongoClient
@@ -80,5 +79,6 @@ listener = StreamListener(api=api)
 streamer = tweepy.Stream(auth=auth, listener=listener)
 print("Tracking: " + str(WORDS))
 streamer.filter(languages=["it"], track=WORDS)
+
 
 
