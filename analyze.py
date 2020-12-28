@@ -24,7 +24,7 @@ numTweets = db.twitterBrazil.count()
 ####################################################
 langsList = []
 for t in my_tweets:
-langsList.append(t['lang'])
+    langsList.append(t['lang'])
 D = Counter(langsList)
 # ----------- Bar Plot ------------------------
 plt.bar(range(len(D)), D.values(), align='center')

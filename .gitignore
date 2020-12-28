@@ -1,2 +1,8 @@
 .ipynb_checkpoints
 .DS_Store
+
+# keys and tokens for twitter
+keys.txt
+
+# notes
+appunti.txt

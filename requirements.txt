@@ -1,0 +1,4 @@
+tweetpy
+pymongo
+matplotlib
+numpy
