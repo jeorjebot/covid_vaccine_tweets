@@ -3,7 +3,7 @@ import json
 from pymongo import MongoClient
 
 # Change your hashtags here
-WORDS = ['vaccino dosi', 'vaccino', 'vaccini', 'vaccinazione', 'vaccinato', 'vaccinati', 'pfizer', 'biontech', 'moderna', 'astrazeneca', 'curevac'] # This is an OR relation
+WORDS = ['vaccino dosi', 'vaccinale', 'vaccino', 'vaccini', 'vaccinazione', 'vaccinato', 'vaccinati', 'pfizer', 'biontech', 'moderna', 'astrazeneca', 'curevac'] # This is an OR relation
 
 # Insert your keys here
 CONSUMER_KEY = None
@@ -24,11 +24,11 @@ class StreamListener(tweepy.StreamListener):
 
     def on_connect(self):
         # Called initially to connect to the Streaming API
-        print("You are now connected to the streaming API.")
+        print("You are now connected to the streaming API.", flush=True)
  
     def on_error(self, status_code):
         # On error - if an error occurs, display the error / status code
-        print('An Error has occured: ' + repr(status_code))
+        print('An Error has occured: ' + repr(status_code), flush=True)
         return False
  
     def on_data(self, data):
@@ -47,17 +47,17 @@ class StreamListener(tweepy.StreamListener):
             username = datajson['user']['screen_name']
 
             #print out a message to the screen that we have collected a tweet
-            print("Tweet collected at " + str(created_at) + " from user @" + username)
+            print("Tweet collected at " + str(created_at) + " from user @" + username, flush=True)
             
             #insert the data into the mongoDB into a collection called twitter_search
             #if twitter_search doesn't exist, it will be created.
             db.tweets.insert_one(datajson)
 			
 			#how many tweets?
-		    #print(str(db.twitterBrazil.count_documents()))
+		    #print(str(db.tweets.count_documents()))
 			
         except Exception as e:
-            print(e)
+            print(e, flush=True)
 
 # Authentication
 auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
@@ -69,15 +69,15 @@ api = tweepy.API(auth, wait_on_rate_limit=True,
 
 try:
     api.verify_credentials()
-    print("Authentication OK")
+    print("Authentication OK", flush=True)
 except:
-    print("Error during authentication")
+    print("Error during authentication", flush=True)
 
 
 #Set up the listener. 
 listener = StreamListener(api=api) 
 streamer = tweepy.Stream(auth=auth, listener=listener)
-print("Tracking: " + str(WORDS))
+print("Tracking: " + str(WORDS), flush=True)
 streamer.filter(languages=["it"], track=WORDS)
 
 
