@@ -1,9 +1,16 @@
 import queue
 import threading
-#from __future__ import print_function
 import tweepy
 import json
 from pymongo import MongoClient
+
+
+"""
+TODO automatic reconnection
+TODO threading
+"""
+
+
 
 # Change your hashtags here
 WORDS = ['vaccino dosi', 'vaccino', 'vaccini', 'vaccinazione', 'vaccinato', 'vaccinati', 'pfizer', 'biontech', 'moderna', 'astrazeneca', 'curevac'] # This is an OR relation
