@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # automatic reconnection within 5 seconds
 while true; do
