@@ -1,0 +1,18 @@
+# run mongo
+docker run --name bda-mongo \
+    -e MONGO_INITDB_ROOT_USERNAME=mongoadmin \
+    -e MONGO_INITDB_ROOT_PASSWORD=pass1234 -d -p \
+    27017:27017 mongo
+
+# entering container
+docker exec -it bda-mongo /bin/bash
+
+# exporting (password: pass1234)
+mongoexport -h localhost:27017 -d test -c tweets -u mongoadmin \
+    --authenticationDatabase=admin \
+    -o tweets.json
+
+# importing (password: pass1234)
+mongoimport --db test --collection tweets \
+    --authenticationDatabase admin --username mongoadmin \
+    --drop --file /tweets.json
