@@ -6,6 +6,10 @@ docker run --name bda-mongo \
 
 # entering container
 docker exec -it bda-mongo /bin/bash
+mongo --username mongoadmin --password pass1234
+
+# copying file to container
+docker cp tweets.json bda-mongo:/tweets.json
 
 # exporting (password: pass1234)
 mongoexport -h localhost:27017 -d test -c tweets -u mongoadmin \
